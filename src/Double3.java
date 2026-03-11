@@ -6,7 +6,6 @@ public record Double3 (double _d1, double _d2, double _d3) {
 
     @Override
     public String toString() { return "(" + _d1 + "," + _d2 + "," + _d3 + ")" ; }
-
     @Override
     public boolean equals(Object obj) {
         return this == obj || (obj instanceof Double3(double od1, double od2, double od3))// uses Util.isZero()
@@ -18,4 +17,6 @@ public record Double3 (double _d1, double _d2, double _d3) {
     @Override
     public int hashCode() { return Objects.hash(_d1, _d2, _d3); }
 // … Operations …
+
+    bnaya חחחחח
 }
