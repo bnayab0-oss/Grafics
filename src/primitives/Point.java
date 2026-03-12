@@ -38,15 +38,15 @@ public class Point {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true; [cite: 442]
-        if (obj == null || getClass() != obj.getClass()) return false; [cite: 443, 444]
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Point other = (Point) obj;
-        return _xyz.equals(other._xyz); [cite: 446]
+        return _xyz.equals(other._xyz);
     }
 
     @Override
     public int hashCode() {
-        return _xyz.hashCode(); [cite: 446]
+        return _xyz.hashCode();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Point {
      * @return a new Vector from the other point to this point
      */
     public Vector subtract(Point other) {
-        return new Vector(_xyz.subtract(other._xyz)); [cite: 81]
+        return new Vector(_xyz.subtract(other._xyz));
     }
 
     /**
@@ -69,7 +69,7 @@ public class Point {
      * @return a new Point after the move
      */
     public Point add(Vector vector) {
-        return new Point(_xyz.add(vector._xyz)); [cite: 81]
+        return new Point(_xyz.add(vector._xyz));
     }
 
     /**
@@ -95,6 +95,6 @@ public class Point {
      * @return the distance
      */
     public double distance(Point other) {
-        return Math.sqrt(distanceSquared(other)); [cite: 82, 499, 500]
+        return Math.sqrt(distanceSquared(other));
     }
 }

@@ -1,7 +1,5 @@
 package geometries.impl;
 
-package geometries.impl;
-
 import static primitives.Util.isZero;
 
 import java.util.List;
