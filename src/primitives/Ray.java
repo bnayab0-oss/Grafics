@@ -3,28 +3,48 @@ package primitives;
 import java.util.Objects;
 
 /**
- * Class Ray represents a semi-line in 3D space, defined by an origin point and a direction vector.
+ * Class representing a ray in 3D space.
+ * A ray consists of an origin point and a normalized direction vector.
+ *
+ * @author Gemini
  */
 public class Ray {
-    /** The starting point of the ray */
     private final Point _head;
-    /** The direction of the ray (normalized) */
     private final Vector _direction;
 
     /**
-     * Constructor to initialize a Ray with an origin point and a direction vector.
-     * The direction vector is automatically normalized.
-     * * @param head the origin point [cite: 105]
-     * @param direction the direction vector [cite: 105]
+     * Constructor to initialize the ray.
+     * The direction vector is normalized automatically.
+     *
+     * @param head      the origin point
+     * @param direction the direction vector
      */
     public Ray(Point head, Vector direction) {
-        _head = head;
-        _direction = direction.normalize();
+        this._head = head;
+        this._direction = direction.normalize();
+    }
+
+    /**
+     * Getter for the head of the ray
+     *
+     * @return the head point
+     */
+    public Point head() {
+        return _head;
+    }
+
+    /**
+     * Getter for the direction of the ray
+     *
+     * @return the direction vector
+     */
+    public Vector direction() {
+        return _direction;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true; // [cite: 439, 442]
+        if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Ray other = (Ray) obj;
         return _head.equals(other._head) && _direction.equals(other._direction);
@@ -37,6 +57,6 @@ public class Ray {
 
     @Override
     public String toString() {
-        return "Ray: origin=" + _head + ", direction=" + _direction;
+        return "Ray: head=" + _head + ", direction=" + _direction;
     }
 }

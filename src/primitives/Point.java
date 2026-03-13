@@ -1,39 +1,84 @@
 package primitives;
 
-import java.util.Objects;
-
 /**
- * Class Point is the basic class representing a point with 3 coordinates in the 3D space.
- * All operations on points return new objects (Immutable).
- * * @author Your Name
+ * Class representing a point in 3D space.
+ * The point is defined by a Double3 coordinate.
+ *
+ * @author Gemini
  */
 public class Point {
     /**
-     * Coordinates of the point in 3D space.
+     * Static constant for the origin point (0,0,0)
+     */
+    public static final Point ZERO = new Point(Double3.ZERO);
+    /**
+     * The coordinate of the point
      */
     protected final Double3 _xyz;
 
     /**
-     * Static constant for the origin point (0,0,0).
-     */
-    public static final Point ZERO = new Point(Double3.ZERO);
-
-    /**
-     * Constructor to initialize Point based on three double values.
-     * * @param x first coordinate
-     * @param y second coordinate
-     * @param z third coordinate
+     * Constructor to initialize the point with three double values.
+     *
+     * @param x coordinate on X axis
+     * @param y coordinate on Y axis
+     * @param z coordinate on Z axis
      */
     public Point(double x, double y, double z) {
-        _xyz = new Double3(x, y, z);
+        this._xyz = new Double3(x, y, z);
     }
 
     /**
-     * Constructor to initialize Point based on a Double3 object.
-     * * @param xyz Double3 value for the coordinates
+     * Constructor to initialize the point with a Double3 object.
+     *
+     * @param xyz the Double3 coordinate
      */
     public Point(Double3 xyz) {
-        _xyz = xyz;
+        this._xyz = xyz;
+    }
+
+    /**
+     * Subtracts another point from this point to get a vector.
+     *
+     * @param other the point to subtract
+     * @return a vector from the other point to this point
+     */
+    public Vector subtract(Point other) {
+        return new Vector(this._xyz.subtract(other._xyz));
+    }
+
+    /**
+     * Adds a vector to this point to create a new point.
+     *
+     * @param vector the vector to add
+     * @return a new point after the move
+     */
+    public Point add(Vector vector) {
+        return new Point(this._xyz.add(vector._xyz));
+    }
+
+    /**
+     * Calculates the squared distance between two points.
+     * Uses the DRY principle and Double3 operations.
+     *
+     * @param other the other point
+     * @return the squared distance
+     */
+    public double distanceSquared(Point other) {
+        Double3 diff = this._xyz.subtract(other._xyz);
+        Double3 res = diff.product(diff);
+        // הגישה לרכיבי ה-record צריכה להתבצע עם קו תחתי לפי ההגדרה במצגת
+        return res._d1() + res._d2() + res._d3();
+    }
+
+    /**
+     * Calculates the distance between two points.
+     * This method must use distanceSquared[cite: 82].
+     *
+     * @param other the other point
+     * @return the distance
+     */
+    public double distance(Point other) {
+        return Math.sqrt(distanceSquared(other));
     }
 
     @Override
@@ -51,50 +96,6 @@ public class Point {
 
     @Override
     public String toString() {
-        return "Point: " + _xyz;
-    }
-
-    /**
-     * Subtracts one point from another to create a vector.
-     * * @param other the point to subtract
-     * @return a new Vector from the other point to this point
-     */
-    public Vector subtract(Point other) {
-        return new Vector(_xyz.subtract(other._xyz));
-    }
-
-    /**
-     * Adds a vector to the point to create a new point.
-     * * @param vector the vector to add
-     * @return a new Point after the move
-     */
-    public Point add(Vector vector) {
-        return new Point(_xyz.add(vector._xyz));
-    }
-
-    /**
-     * Calculates the squared distance between two points.
-     * * @param other the other point
-     * @return the squared distance
-     */
-    public double distanceSquared(Point other) {
-        double x1 = _xyz._d1;
-        double y1 = _xyz._d2;
-        double z1 = _xyz._d3;
-
-        double x2 = other._xyz._d1;
-        double y2 = other._xyz._d2;
-        double z2 = other._xyz._d3;
-
-        return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2); [cite: 81]
-    }
-
-    /**
-     * Calculates the distance between two points using distanceSquared.
-     * * @param other the other point
-     * @return the distance
-     */
-    public double distance(Point other) {
-        return Math.sqrt(distanceSquared(other));
+        return "Point:" + _xyz;
     }
 }

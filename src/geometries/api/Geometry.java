@@ -4,15 +4,15 @@ import primitives.Point;
 import primitives.Vector;
 
 /**
- * Interface for all geometric objects in the 3D space.
- * @author Your Name
+ * Abstract class representing a geometric body in 3D space.
+ * All geometries must implement getNormal method.
  */
-public interface Geometry {
-
+public abstract class Geometry {
     /**
      * Calculates the normal vector to the geometry at a given point.
+     *
      * @param point The point on the geometry surface
-     * @return The normal vector (unit vector)
+     * @return The normal vector
      */
-    Vector getNormal(Point point);
+    public abstract Vector getNormal(Point point);
 }
