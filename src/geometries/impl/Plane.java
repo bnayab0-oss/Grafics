@@ -23,8 +23,13 @@ public class Plane extends Geometry {
      */
     public Plane(Point p1, Point p2, Point p3) {
         this._point = p1;
-        this._normal = null; // To be implemented in later stages
-    }
+// 1. יוצרים שני וקטורים על המישור (בעזרת הפרימיטיבים שלנו)
+        Vector v1 = p2.subtract(p1);
+        Vector v2 = p3.subtract(p1);
+
+        // 2. משתמשים במכפלה וקטורית כדי למצוא וקטור שמאונך לשניהם
+        // ואז מנרמלים אותו. זה הנורמל של המישור!
+        this._normal = v1.crossProduct(v2).normalize();    }
 
     /**
      * Constructor to initialize the plane from a point and a normal vector.

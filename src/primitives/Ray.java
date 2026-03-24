@@ -2,6 +2,8 @@ package primitives;
 
 import java.util.Objects;
 
+import static primitives.Util.isZero;
+
 /**
  * Class representing a ray in 3D space.
  * A ray consists of an origin point and a normalized direction vector.
@@ -41,7 +43,19 @@ public class Ray {
     public Vector direction() {
         return _direction;
     }
-
+    /**
+     * Calculates a point on the ray at a given distance.
+     *
+     * @param t the distance from the head of the ray
+     * @return the point: P = P0 + t*v
+     */
+    public Point getPoint(double t) {
+        // אם t הוא 0, אנחנו פשוט בראש הקרן (חיסכון בחישוב ויצירת וקטור אפס)
+        if (isZero(t)) {
+            return _head;
+        }
+        return _head.add(_direction.scale(t));
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
